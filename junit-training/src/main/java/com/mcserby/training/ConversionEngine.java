@@ -1,5 +1,7 @@
 package com.mcserby.training;
 
+import com.mcserby.training.exceptions.ConversionFailedException;
+import com.mcserby.training.exceptions.InvalidPhraseException;
 import com.mcserby.training.model.ConversionOperation;
 import com.mcserby.training.model.ConversionResult;
 
@@ -13,8 +15,12 @@ public class ConversionEngine {
         this.unitConverter = unitConverter;
     }
 
-    public ConversionResult convert(String phrase){
-        ConversionOperation conversionOperation = this.syntaxParser.parse(phrase);
-        return unitConverter.convert(conversionOperation);
+    public ConversionResult convert(String phrase) throws ConversionFailedException {
+        try {
+            ConversionOperation conversionOperation = this.syntaxParser.parse(phrase);
+            return unitConverter.convert(conversionOperation);
+        } catch (InvalidPhraseException e){
+            throw new ConversionFailedException(e);
+        }
     }
 }

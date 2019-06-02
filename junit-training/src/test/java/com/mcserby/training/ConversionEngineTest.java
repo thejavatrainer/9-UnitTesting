@@ -1,5 +1,7 @@
 package com.mcserby.training;
 
+import com.mcserby.training.exceptions.ConversionFailedException;
+import com.mcserby.training.exceptions.InvalidPhraseException;
 import com.mcserby.training.model.ConversionOperation;
 import com.mcserby.training.model.ConversionResult;
 import org.junit.Rule;
@@ -24,7 +26,7 @@ public class ConversionEngineTest {
     private UnitConverter4 unitConverter;
 
     @Test
-    public void convert() {
+    public void convert() throws InvalidPhraseException, ConversionFailedException {
         /// SyntaxParser syntaxParser = mock(SyntaxParser.class);
         ConversionEngine engine = new ConversionEngine(syntaxParser, unitConverter);
         ConversionOperation operation = new ConversionOperation(Unit.METER, Unit.CENTIMETER, 2d);
