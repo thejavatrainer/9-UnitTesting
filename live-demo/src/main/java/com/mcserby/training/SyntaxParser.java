@@ -1,6 +1,6 @@
 package com.mcserby.training;
 
-import com.mcserby.training.exceptions.InvalidPhraseException;
+import com.mcserby.training.exception.InvalidPhraseException;
 import com.mcserby.training.model.ConversionOperation;
 
 import java.util.List;
@@ -14,10 +14,9 @@ public class SyntaxParser {
         if (parts.isEmpty() || parts.size() != 4) {
             throw new InvalidPhraseException("could not parse phrase: " + phrase);
         }
-        System.out.println("sytax parser");
         double value = Double.parseDouble(parts.get(0));
-        Unit from = UnitReference.getUnit(parts.get(1));
-        Unit to = UnitReference.getUnit(parts.get(3));
+        Unit from = UnitRefs.getUnit(parts.get(1));
+        Unit to = UnitRefs.getUnit(parts.get(3));
         return new ConversionOperation(from, to, value);
     }
 }
